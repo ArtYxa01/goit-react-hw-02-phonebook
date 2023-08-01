@@ -38,8 +38,9 @@ export class App extends React.Component {
       el => contactData.name.toLowerCase() === el.name.toLowerCase()
     );
 
-    if (comparison) {
-      alert(`${contactData.name} is already in contacts!`);
+    if (isExist) {
+      alert(`${name} is already in contacts.`);
+      return
     }
     const contact = {
       ...contactData,
