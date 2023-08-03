@@ -1,32 +1,17 @@
-import bookContacts from  '../data/bookContacts'
+import bookContacts from '../data/bookcontact'
 import { nanoid } from 'nanoid';
-import { ContactForm } from '../contactform/contactform';
-import { Filter } from '../contactfilter/contactfilter';
-import { ContactList } from '../contactlist/contactlist';
+import { ContactForm } from './contactform/contactform';
+import { Filter } from './contactfilter/contactfilter';
+import { ContactList } from './contactlist/contactlist';
+import React from 'react';
 
 const contacts = bookContacts.contacts;
 
 export class App extends React.Component {
   state = {
-    contacts: [],
-    filter: "",
+    contacts,
+    filter: '',
   };
-  };
-
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-    if (parsedContacts) {
-      this.setState({ contacts: parsedContacts });
-    }
-  }
-
-  componentDidUpdate(prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
-  }
-
   onRemoveContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
@@ -38,9 +23,8 @@ export class App extends React.Component {
       el => contactData.name.toLowerCase() === el.name.toLowerCase()
     );
 
-    if (isExist) {
-      alert(`${name} is already in contacts.`);
-      return
+    if (comparison) {
+      alert(`${contactData.name} is already in contacts!`);
     }
     const contact = {
       ...contactData,
@@ -85,4 +69,3 @@ export class App extends React.Component {
     );
   }
 }
-
