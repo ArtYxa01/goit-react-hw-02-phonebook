@@ -24,8 +24,8 @@ export class App extends React.Component {
     );
 
     if (comparison) {
-      alert(`${contactData.name} is already in contacts!`);
-    }
+      return  alert(`${contactData.name} is already in contacts!`);
+      }
     const contact = {
       ...contactData,
       id: nanoid(),
